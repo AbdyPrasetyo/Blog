@@ -12,6 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (!Auth::user()->isAdmin()) {
+            return redirect()->route('forbidden');
+        }
+
         $users = User::all();
         return view('admin.akun', compact('users'));
     }

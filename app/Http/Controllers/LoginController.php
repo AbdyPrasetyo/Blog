@@ -11,9 +11,9 @@ class LoginController extends Controller
  {
     if ($user = Auth::user()) {
         if ($user->role == 'admin') {
-            return redirect()->intended('/admin/home');
+            return redirect()->intended('home');
         }elseif ($user->role == 'user'){
-            return redirect()->intended('/user/posts');
+            return redirect()->intended('homeuser');
         }
     }
     return view('auth.login',[
@@ -34,9 +34,9 @@ public function proses(Request $request)
         $request->session()->regenerate();
         $user = Auth::user();
         if ($user->role == 'admin') {
-            return redirect()->intended('admin/home');
+            return redirect()->intended('home');
         }elseif ($user->role == 'user'){
-            return redirect()->intended('/user/posts');
+            return redirect()->intended('homeuser');
         }
         return redirect()->intended('/login');
     }

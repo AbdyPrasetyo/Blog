@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\UserPostController;
 
 /*
@@ -18,7 +20,7 @@ use App\Http\Controllers\UserPostController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('auth.login');
 });
 
 
@@ -35,9 +37,10 @@ Route::controller(LoginController::class)->group(function(){
  Route::group(['middleware' => ['auth']], function (){
     Route::group(['middleware' => ['cekUserLogin:admin']], function () {
 
-    Route::get('/admin/home', function () {
-        return view('admin/home');
-    });
+    // Route::get('/admin/home', function () {
+    //     return view('admin/home');
+    // });
+        Route::get('/home', [HomeController::class, 'index']);
         Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
         Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
         Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
@@ -55,9 +58,13 @@ Route::controller(LoginController::class)->group(function(){
         Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 });
     Route::group(['middleware' => ['cekUserLogin:user']], function () {
-        Route::get('/user/home', function () {
-            return view('user/home');
-        });
+
+        Route::get('/forbidden', function () {
+            return view('auth.forbiden');
+        })->name('forbidden');
+
+        Route::get('/homeuser', [HomeUserController::class, 'index']);
+
         Route::get('/user/posts', [UserPostController::class, 'index'])->name('user.posts.index');
         Route::get('/user/posts/create', [UserPostController::class, 'create'])->name('user.posts.create');
         Route::post('/user/posts', [UserPostController::class, 'store'])->name('user.posts.store');
