@@ -2,16 +2,17 @@
     <li>php artisan migrate</li>
     <li>php artisan db:seed --class=UserSeeder
 </li>
+   </ol>
     <p>
-        Akun admin
-        Username: admin
-        Password: admin123
-
-        Akun author
-        Username: user
-        Password: user123
+        Akun admin <br>
+        Username: admin<br>
+        Password: admin123<br>
+<br><br>
+        Akun author<br>
+        Username: user<br>
+        Password: user123<br>
     </p>
-</ol>
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
